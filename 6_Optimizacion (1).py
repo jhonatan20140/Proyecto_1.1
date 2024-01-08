@@ -133,7 +133,7 @@ cond7 = (f.col('tasa_propuesta') > 0.959) & (f.col('FLG_SUBSEGMENTO_CONSUMO').is
 cond8 = (f.col('tasa_propuesta') > 0.429) & (f.col('FLG_SUBSEGMENTO_CONSUMO').isin(['BEX']))
 cond9 = (f.col('tasa_propuesta') > 0.199) & (f.col('FLG_SUBSEGMENTO_CONSUMO').isin(['ENALTA']))
 
-
+#borrando los que no cumplen las condiciones
 df_seg_opt_caps_f = df_seg_opt_caps.where(~(cond1 | cond2 | cond3 | cond4 | cond5 | cond7 | cond8 | cond9 ))
 
 # Guardar
@@ -167,6 +167,7 @@ df_res_opt.show()
 
 # ========================================================================================
 # Leer base Caps
+# se quito los datos no necesarios, filtrada
 # =========================================
 nombre_base_muestra = f'1f_dta_iter_opt_caps_{campana_aux}'
 df_seg_opt_caps = spark.read.format('parquet').load(f"{path_hdfs_sandbox_data_root}/out/5_Optimizacion/{nombre_base_muestra}") #AGREGAR BLAZE
@@ -208,7 +209,7 @@ df_seg_opt_caps = spark.read.format('parquet').load(f"{path_hdfs_sandbox_data_ro
 #df_res_pd_prueba = spark.createDataFrame(emptyRDD,schema)
 ## ========================================================================================
 
-
+#Aca comienza la optimización
 # ========================================================================================
 
 import numpy as np
