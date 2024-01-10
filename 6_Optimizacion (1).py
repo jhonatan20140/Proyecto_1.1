@@ -101,6 +101,8 @@ df_seg_opt= df_seg_opt_mx_efectividad
 for ind in indicators_reported:
   df_seg_opt = df_seg_opt.withColumn(f'{ind}_estimado',f.col(f'{ind}')*f.col('prob_adj_ef'))
 
+  
+
 # MTO estimado
 df_seg_opt = df_seg_opt.withColumn('MTO_estimado',f.col('mtofinalofertadosol')*f.col('prob_adj_ef'))
 
